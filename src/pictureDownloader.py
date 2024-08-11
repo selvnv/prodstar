@@ -1,6 +1,7 @@
 import requests
 import os
 import random as rnd
+import pprint
 
 # Ключ, необходимый для использования Pixabay API
 API_KEY = '45305139-337344c749e506a45c3dc7ffd'
@@ -16,24 +17,29 @@ response = requests.get(url)
 
 # Приведение ответа к формату JSON
 data = response.json()
+pprint.pprint(data)
 
-# Выбор случайного элемента (метаданных) данных ответа
-random_hit = rnd.choice(data['hits'])
+# Если найдены результаты по запросу
+if len(data['hits']):
+    # Выбор случайного элемента (метаданных) данных ответа
+    random_hit = rnd.choice(data['hits'])
 
-# Получение из метаданных изображения ссылки для скачивания
-image_url = random_hit['largeImageURL']
+    # Получение из метаданных изображения ссылки для скачивания
+    image_url = random_hit['largeImageURL']
 
-# Получить из метаданных изображения его идентификатор
-# Идентификатор станет именем сохраняемого файла
-image_id = random_hit['id']
+    # Получить из метаданных изображения его идентификатор
+    # Идентификатор станет именем сохраняемого файла
+    image_id = random_hit['id']
 
-# Выполнение запроса
-# Ответ - картинка в виде последовательности байт, которая сохраняется в image_data
-image_data = requests.get(image_url).content
+    # Выполнение запроса
+    # Ответ - картинка в виде последовательности байт, которая сохраняется в image_data
+    image_data = requests.get(image_url).content
 
-# Определение пути к папке с загруженными картинками
-path_to_downloads = os.path.join(os.getcwd(), 'downloads')
+    # Определение пути к папке с загруженными картинками
+    path_to_downloads = os.path.join(os.getcwd(), 'downloads')
 
-# Запись байтовых данных в файл с нужным расширением
-with open(os.path.join(path_to_downloads,  f'{image_id}.jpg'), mode='wb') as file:
-    file.write(image_data)
+    # Запись байтовых данных в файл с нужным расширением
+    with open(os.path.join(path_to_downloads,  f'{image_id}.jpg'), mode='wb') as file:
+        file.write(image_data)
+else:
+    print('Nothing was found for the query!')
