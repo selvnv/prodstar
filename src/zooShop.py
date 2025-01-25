@@ -21,12 +21,12 @@ class Pet:
         self._protected_type = type
         self._protected_age = age
         self._protected_gender = gender
-    
+
     def get_info(self):
         print(f'Name: {self._protected_name};\nType: {self._protected_type};\nAge: {self._protected_age};\nGender: {self._protected_gender}\n')
 
 class Dog(Pet):
-    def __init__(self, name, type, age, gender, breed):
+    def __init__(self, name: str, type: str, age: int, gender: str, breed: str):
         super().__init__(name, type, age, gender)
         self.__breed = breed
 
@@ -34,10 +34,10 @@ class Dog(Pet):
         print('Woof!\n')
 
 class Cat(Pet):
-    def __init__(self, name, type, age, gender, color):
+    def __init__(self, name: str, type: str, age: int, gender: str, color: str):
         super().__init__(name, type, age, gender)
         self.__color = color
-    
+
     def meow(self):
         print('Meow!\n')
 
