@@ -1,6 +1,6 @@
-string = input('Enter your string')
+import requests
 
-splitted = string.split()
-splitted.sort()
+response = requests.get('https://ya.ru')
 
-print(splitted)
+print(response.status_code)
+print(response.content)
