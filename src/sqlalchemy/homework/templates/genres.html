@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block body %}
+  {%- for genre in genres %}
+    <li> Жанр: {{ genre.name }} </li>
+  {%- endfor %}
+{% endblock %}
