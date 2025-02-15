@@ -18,3 +18,23 @@
 2. В отображении объектов модели Book на главной странице добавить html-чекбокс, отображающий свойство “is_read” (прочитана книга или нет), и кнопку “Сохранить”.
 
 3. При нажатии на чекбокс и кнопку “Сохранить” текущий статус книги (прочитана или нет) должен сохраняться в БД вызовом к API приложения методом POST.
+
+#### Запуск (Windows PowerShell)
+1) Предварительно установить [PostgreSQL](https://metanit.com/sql/postgresql/1.1.php)
+2) Установить виртуальное окружение
+```
+    virtualenv env
+    env/Scripts/activate
+```
+3) Установить зависимости
+```
+    pip install -r requirements.txt
+```
+4) Задать переменную окружения SQLALCHEMY_DATABASE_URI
+```
+    $Env:SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://login:pass@localhost:5432/postgres?client_encoding=utf8'
+```
+5)  Запустить приложение:
+```
+    py .\app.py
+```

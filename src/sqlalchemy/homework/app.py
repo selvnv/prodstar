@@ -1,3 +1,5 @@
+import os
+
 from datetime import datetime
 
 from flask import Flask
@@ -9,7 +11,8 @@ from models import db, Genre, Book
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql+psycopg2://postgres:postgres@localhost:5432/postgres?client_encoding=utf8'
+# To set env_variable: $Env:SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@localhost:5432/postgres?client_encoding=utf8'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
 db.init_app(app)
 
