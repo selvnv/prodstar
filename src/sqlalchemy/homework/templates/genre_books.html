@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Книги жанра {{ genre_name }}</h2>
+  {%- for book in books %}
+    <ul>
+      <li>Название: {{ book.title }}</li>
+      <li>Автор: {{ book.author }}</li>
+      <li>Год выпуска: {{ book.issue_year }}</li>
+    </ul>
+    <hr>
+  {%- endfor %}
+{% endblock %}

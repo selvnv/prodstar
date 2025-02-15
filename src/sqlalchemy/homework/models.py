@@ -1,14 +1,11 @@
-# from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy import func
-# from sqlalchemy.orm import relationship
-
 from __future__ import annotations
-from datetime import date
+from datetime import datetime
 from typing import List
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
-from sqlalchemy import Integer, String, Date
+from sqlalchemy import func
+from sqlalchemy import String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import relationship
@@ -27,7 +24,10 @@ class Book(db.Model):
   id: Mapped[int] = mapped_column(primary_key=True)
   title: Mapped[str]
   author: Mapped[str]
-  issue_date: Mapped[date]
+  issue_year: Mapped[str]
+  is_read: Mapped[bool] = mapped_column(default=False)
+  create_date: Mapped[datetime] = mapped_column(server_default=func.now())
+  change_date: Mapped[datetime] = mapped_column(default=func.now())
 
   genre_id: Mapped[int] = mapped_column(ForeignKey("genres.id"))
   genre: Mapped[Genre] = relationship(
@@ -35,13 +35,15 @@ class Book(db.Model):
   )
 
   def __repr__(self):
-      return f'Book(title={self.title}, author={self.author}, issue_date={self.issue_date}, genre={self.genre})'
+      return f'Book(title={self.title}, author={self.author}, issue_year={self.issue_date}, is_read={self.is_read}, genre={self.genre.name})'
 
 class Genre(db.Model):
   __tablename__ = "genres"
 
   id: Mapped[int] = mapped_column(primary_key=True)
   name: Mapped[str] = mapped_column(String(50))
+  create_date: Mapped[datetime] = mapped_column(server_default=func.now())
+  change_date: Mapped[datetime] = mapped_column(default=func.now())
 
   books: Mapped[List[Book]] = relationship(
       back_populates="genre"

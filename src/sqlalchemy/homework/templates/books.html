@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Книги</h2>
+  <div>
+    {%- for book in books %}
+      <div>
+        Название: {{ book.title }}
+        <ul>
+          <li>Автор: {{ book.author }}</li>
+          <li>Год выпуска: {{ book.issue_year }}</li>
+          <li>Жанр:
+            <a href="{{ url_for('get_books_by_genre', genre_id=book.genre.id) }}">
+              {{ book.genre.name }}
+            </a>
+          </li>
+          <li>Дата создания записи: {{ book.create_date.strftime("%H:%M:%S %d-%m-%Y") }}</li>
+          <li>Дата изменения записи: {{ book.change_date.strftime("%H:%M:%S %d-%m-%Y") }}</li>
+        </ul>
+        <form action="{{ url_for('update_book', id=book.id) }}" method="POST">
+          <div>Уже прочитана?
+            <input type="checkbox" name="is_read", value="true" {% if book.is_read %}checked{% endif %}>
+          </div>
+          <input type="submit" value="Сохранить">
+        </form>
+      </div>
+      <hr>
+    {%- endfor %}
+  </div>
+{% endblock %}
