@@ -1,0 +1,73 @@
+[project]
+name = "mlbcountswebapp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.0",
+    "gspread>=6.1.4",
+    "gunicorn>=23.0.0",
+    "pandas>=2.2.3",
+    "pymongo>=4.10.1",
+    "requests>=2.32.3",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.9",
+]
+
+[tool.ruff]
+line-length = 100
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[tool.ruff.lint]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+select = [
+    "N", # pep8-naming
+    "E", # pycodestyle
+    "F", # Pyflakes
+    "ERA001", # Checks for commented-out Python code.
+    "E501", # Add the `line-too-long` rule to the enforced rule set.
+    "S201", # Checks for uses of debug=True in Flask.
+    "PD003", # Checks for uses of .isnull on Pandas objects.
+    "PD004", # Checks for uses of .notnull on Pandas objects.
+    "PD901", # Checks for assignments to the variable df.
+]
+
+[tool.ruff.format]
+# Configures the preferred quote character for strings (double | single)
+quote-style = "double"
