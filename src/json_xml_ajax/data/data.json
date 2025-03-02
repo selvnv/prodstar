@@ -1,0 +1,20 @@
+{
+    "client": "Jon Smith",
+    "products": [
+        {
+            "name": "product A",
+            "price": 20
+        },
+        {
+            "name": "product B",
+            "price": 40
+        },
+        {
+            "name": "product B",
+            "price": 40
+        }
+    ],
+    "voucher": {
+        "discount": "20%"
+    }
+}
